@@ -1,0 +1,7 @@
+- hosts: webservers
+  user: root
+  tasks:
+  - lvg:  vg=subbuvg pvs=/dev/sdc2,/dev/sdb2,/dev/sdc1 
+  - lvol: vg=subbuvg lv=subbulv size=+100%FREE
+  - filesystem: fstype=ext4 dev=/dev/subbuvg/subbulv
+  - mount: src=/dev/subbuvg/subbulv fstype=ext4 name=/subbudata state=mounted
